@@ -23,3 +23,5 @@ tags:
 ![](http://i.imgur.com/fNglt8k.jpg)
 
 ![](http://i.imgur.com/1bEwCSO.jpg)
+
+忠于自己...
