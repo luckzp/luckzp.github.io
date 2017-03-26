@@ -64,7 +64,7 @@ counter: true
 #若使用disqus，请在博客config文件中填写disqus_shortname，并关闭多说评论
 duoshuo: lucklypeng
 
-counter: true
+
 
 # 智能菜单
 # 如不需要，将该对应项置为false
