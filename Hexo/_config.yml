@@ -7,7 +7,7 @@ title: ZhangPeng
 subtitle: To be what you want to be
 description:
 author: Zhang Peng
-language:
+language: zh-CN
 timezone:
 
 # URL
@@ -63,7 +63,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: hexo-theme-yilia
+theme: maupassant-hexo
 exclude_generator:
 
 # Deployment
