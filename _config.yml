@@ -10,6 +10,8 @@ author: Zhang Peng
 language: zh-CN
 timezone:
 
+admin:
+  deployCommand: './hexo-deploy.sh'
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://yoursite.com
