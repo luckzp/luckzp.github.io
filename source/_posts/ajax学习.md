@@ -1,4 +1,5 @@
 title: ajax学习
+---
 author: Zhang Peng
 tags:
   - 前端
