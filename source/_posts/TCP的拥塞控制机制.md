@@ -9,7 +9,7 @@ tags:
 ---
 拥塞控制（congestion control)是TCP协议的一项重要功能，TCP的拥塞控制机制是从端到端的角度，推测网络是否发生拥塞，如果推断网络发生拥塞，则立即将数据发送速率降下来，以便缓解网络拥塞。
 
-
+<!--more--> 
 
 TCP的拥塞控制算法包括了慢启动（slow start）、拥塞避免（congestion avoidance）、快速重传（fast retransmit）和快速恢复（fast recovery）四部分。
 
