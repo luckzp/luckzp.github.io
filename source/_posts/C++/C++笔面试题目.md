@@ -17,6 +17,8 @@ process(think);//passes address of think() to process()
 thought(think);//passes return value of think to thought()
 ```
 
+<!--more--> 
+
 b.声明函数指针
 
 ```C++

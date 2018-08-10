@@ -17,6 +17,8 @@ tags:
 
 ![](http://ovuyz1070.bkt.clouddn.com/18-1-6/44870068.jpg)
 
+<!--more--> 
+
 ```c++
 int partition(vector<int>& nums, int low, int high)
 {

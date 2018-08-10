@@ -13,6 +13,8 @@ char str1[20] = "Helloworld!";
 
 char str2[ ] = "Have a niceday!";
 
+<!--more--> 
+
 •数组、函数与指针
 
 int *a[10]; 
