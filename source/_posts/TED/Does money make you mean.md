@@ -19,3 +19,5 @@ We're at unprecedented levels of economic inequality. What that means is that we
 ### what do we do? 
 
 we've been finding in our own laboratory research that small psychological interventions, small changes to people's values, small nudges in certain directions,can restore levels of egalitarianism and empathy. For instance, **reminding people of the benefits of cooperation or the advantages of community, cause wealthier individuals to be just as egalitarian as poor people.** 
+
+https://www.ted.com/talks/paul_piff_does_money_make_you_mean
