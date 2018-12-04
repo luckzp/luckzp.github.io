@@ -30,13 +30,13 @@ Bean容器初始化基础：依赖两个包
 
 Spring注入是指在启动Spring容器加载bean配置的时候，完成对变量的赋值行为。
 
-![](http://ovuyz1070.bkt.clouddn.com/18-3-23/94560729.jpg)
+![](http://ww1.sinaimg.cn/large/aacc02d8ly1fxv1dg2ewfj20wp0c70ue.jpg)
 
 ## AOP
 
 面向切面，所有业务都要处理的业务，如打印日志，登录拦截。
 
-![](http://ovuyz1070.bkt.clouddn.com/18-3-23/29890993.jpg)
+![](http://ww1.sinaimg.cn/large/aacc02d8ly1fxv1dpe89mj20ns0eajug.jpg)
 
 ### JDBC数据库全过程
 
