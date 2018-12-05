@@ -63,7 +63,7 @@ double y = pf(5);//also call pam() using the pointer pf
 
 编译器处理虚函数的方法是：给每个对象添加一个隐藏成员。隐藏成员中保存了一个指向函数地址数组的指针。这种数组称为虚函数表(virtual function table，vtbl)。**虚函数表中存储了为类对象进行声明的虚函数地址。**
 
-![](http://ovuyz1070.bkt.clouddn.com/17-9-19/47767513.jpg)
+![image](https://wx2.sinaimg.cn/large/aacc02d8ly1fxvoewmi1hj20rp0ludnv.jpg)
 
 ### 3.**结构体内存对齐**
 
