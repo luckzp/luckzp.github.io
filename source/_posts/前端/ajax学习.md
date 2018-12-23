@@ -58,4 +58,4 @@ Ajax是一种异步请求数据的web开发技术，对于改善用户的体验�
 
 **效果图：**
 
-<img src="http://ovuyz1070.bkt.clouddn.com/18-7-3/41225088.jpg" alt="">
+![](http://ww1.sinaimg.cn/large/aacc02d8ly1fxv1c35oiij20pu0a3gr3.jpg)

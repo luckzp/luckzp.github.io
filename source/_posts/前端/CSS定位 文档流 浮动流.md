@@ -7,7 +7,7 @@ reward: true
 tags: 
 	- 前端
 ---
-# ![](http://ovuyz1070.bkt.clouddn.com/17-11-20/73886688.jpg)
+# ![](http://ww1.sinaimg.cn/large/aacc02d8ly1fxv1ita8utj20n7028aa0.jpg)
 
 昨天写CSS的时候，发现div的高度不能自适应。然后在[CSS 浮动](http://www.cnblogs.com/jiqing9006/archive/2012/07/30/2615231.html)找到解决方案了。
 
@@ -53,4 +53,4 @@ tags:
 
 知道这个问题后，我就没有将b设置为浮动，高度就自适应到b的高度了。
 
-![](http://ovuyz1070.bkt.clouddn.com/17-11-20/11053550.jpg)
+![](http://ww1.sinaimg.cn/large/aacc02d8ly1fxv1j866vyj20n7028q2w.jpg)
