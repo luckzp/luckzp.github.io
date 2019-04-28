@@ -9,8 +9,8 @@ tags:
 
 虚拟机栈存的是方法，每个方法包括：局部变量表，操作数栈，动态链接（与其他方法相链接），出口。
 
-![](http://ovuyz1070.bkt.clouddn.com/18-10-28/59804233.jpg)
+![](http://ww1.sinaimg.cn/large/aacc02d8ly1fxuyutofxmj20vw0lidrd.jpg)
 
 
 
-![](http://ovuyz1070.bkt.clouddn.com/18-10-28/55973045.jpg)
+![](http://ww1.sinaimg.cn/large/aacc02d8ly1fxuyvjd0o1j20qr0fddju.jpg)
