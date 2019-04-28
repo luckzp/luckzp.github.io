@@ -1,20 +1,30 @@
-language: node_js # 设置语言
-node_js: stable # 设置相应版本
+language: node_js   #设置语言
+node_js: stable     #设置相应的版本
+cache:
+    directories:
+        - node_modules    #据说可以减少travis构建时间
+before_install:
+  - npm install -g hexo
+  - npm install -g hexo-cli
 install:
-    - npm install # 安装hexo及插件
-    - npm install hexo-deployer-git --save
+  - npm install   #安装hexo及插件
+before_script:
+  - npm install -g mocha
+  - git clone --branch master https://github.com/luckzp/luckzp.github.io.gi public
 script:
-    - hexo clean # 清除
-    - hexo g # 生成
+  - hexo clean   #清除
+  - hexo g   #生成
 after_script:
-    - git config user.name "luckzp" # 修改name
-    - git config user.email "245527922@qq.com" # 修改email
-    - sed -i "s/gh_token/${GH_TOKEN}/g" ./_config.yml
-    - hexo deploy
+  - cd ./public
+  - git init
+  - git config user.name "luckzp"   #修改成自己的github用户名
+  - git config user.email "245527922@qq.com"   #修改成自己的GitHub邮箱
+  - git add .
+  - git commit -m "update by Travis-CI"
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master #GH_token就是在travis中设置的token
 branches:
-    only:
-        - hexo #只监测hexo分支，hexo是我的分支的名称，可根据自己情况设置
+  only:
+  - hexo  #只监测这个分支，一有动静就开始构建
 env:
     global:
         - GH_REF: github.com/luckzp/luckzp.github.io.git #设置GH_REF，注意更改yourname
-        - GH_TOKEN: 30a7b2438e59a8f92fa577033566f069c45f2c6b
