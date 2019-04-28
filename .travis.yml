@@ -29,7 +29,7 @@ script:
 after_script:
   - git config user.name "luckzp"
   - git config user.email "245527922@qq.com"
-  - sed -i "s/gh_token/${GH_TOKEN}/g" ./_config.yml
+  - sed -i "s/${GH_TOKEN}/g" ./_config.yml
   - cat ./_config.yml
   - hexo deploy
 # E: Build LifeCycle
