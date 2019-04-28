@@ -1,35 +1,19 @@
 language: node_js
-sudo: required
-node_js: 
-  - 7.9.0
-
-cache:
-  directories:
-    - node_modules
+node_js: --lts
 
 branches:
   only:
     - hexo 
 
-before_install:
-  - npm install -g hexo-cli
-
-# S: Build Lifecycle
-install:
-  - npm install
-  - npm install hexo-deployer-git --save
-
 before_script:
- # - npm install -g gulp
-
-script:
-  - hexo clean
-  - hexo generate
-
-after_script:
   - git config user.name "luckzp"
   - git config user.email "245527922@qq.com"
   - sed -i'' "s~https://github.com/luckzp/luckzp.github.io.git~https://${GH_TOKEN}@github.com/luckzp/luckzp.github.io.git~" _config.yml
   - cat ./_config.yml
   - hexo deploy
+
+script:
+  - hexo g
+  - hexo d
+
 # E: Build LifeCycle
