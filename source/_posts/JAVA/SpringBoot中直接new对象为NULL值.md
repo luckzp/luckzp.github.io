@@ -7,7 +7,6 @@ reward: true
 tags: 
 	- JAVA
 ---
-12
 在springBoot中如果直接new一个对象出来，那么在此对象使用了@Autowired注解都会为NULL值。
 
 ![](http://ww1.sinaimg.cn/large/aacc02d8ly1g2ic3hf2v3j215g0le40u.jpg)

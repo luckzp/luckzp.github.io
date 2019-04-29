@@ -2,7 +2,7 @@
 layout: post
 title: "How to see past your own perspective and find truth"
 comments: true
-reward: true
+data: 2019-4-29 09:49:03
 tags: 
 	- TED
 ---

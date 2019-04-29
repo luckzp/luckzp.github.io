@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Matrix multiply"
+data: 2019-4-29 09:47:27
 tags: 
 	- C++
 ---

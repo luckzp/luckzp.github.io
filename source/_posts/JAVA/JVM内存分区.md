@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "JVM内存分区"
+data: 2019-4-29 09:46:57
 tags: 
 	- JAVA
 ---
