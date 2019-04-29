@@ -6,9 +6,6 @@ branches:
   only:
     - hexo 
 
-before_install:
-  - npm install -g hexo-cli
-  - git clone https://github.com/iissnan/hexo-theme-next themes/next
 
 # Start: Build Lifecycle
 install:
