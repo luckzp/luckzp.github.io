@@ -20,13 +20,3 @@ tags:
 
 ![](http://ww1.sinaimg.cn/large/aacc02d8ly1g2icmib810j20ov02ywep.jpg)
 
-#### Spring使用：单独使用Bean容器（Bean管理）。
-
-Bean容器初始化基础：依赖两个包
-
-- org.springframework.beans 中的BeanFactory提供配置结构和基本功能，加载并初始化Bean
-- org.springframework.context 中的 ApplicationContext保存了Bean对象并在Spring中被广泛使用
-
-Spring注入是指在启动Spring容器加载bean配置的时候，完成对变量的赋值行为。
-
-![](http://ww1.sinaimg.cn/large/aacc02d8ly1fxv1dg2ewfj20wp0c70ue.jpg)
