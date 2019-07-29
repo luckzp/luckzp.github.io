@@ -2,7 +2,7 @@
 layout: post
 title: "Does money make you mean?"
 comments: true
-data: 2019-4-29 09:48:45
+date: 2019-5-20 11:15:07
 tags: 
 	- TED
 ---
