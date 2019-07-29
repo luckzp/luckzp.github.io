@@ -21,4 +21,4 @@ tags:
 3. 测试代码都放在src/test/java 下面。
 4. 配置文件都放在src/main/resources 下面。
 
-![微信图片_20190729224651](C:\Users\Administrator\Desktop\微信图片_20190729224651.jpg)
+![](http://ww1.sinaimg.cn/large/aacc02d8ly1g5h44289m8j20m805waa9.jpg)
