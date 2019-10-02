@@ -1,6 +1,7 @@
 ---
 title: about
 date: 2017-09-04 13:01:49
+type: "about"
 ---
 后端JAVA开发一枚，平时喜欢捣鼓捣鼓....
 
