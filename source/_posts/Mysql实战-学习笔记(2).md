@@ -25,7 +25,7 @@ tags: Mysql
 
 当事务隔离级别是可重复读时
 
-- 快照读： 读取的是事务开启前的数据，比如 select
+- 快照读： 读取的是事务开启前的数据，比如 select。
 
   ```sql
   select * from table …
