@@ -63,6 +63,8 @@ mysql -u[username] -p[password] [database] < backup.sql
 select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx_started))>60
 ```
 
+同时也可以排查 Lock wait timeout exceeded; try restarting transaction 异常，找到相应的线程并kill thread id。 锁等待超时。是当前事务在等待其它事务释放锁资源造成的。可以找出锁资源竞争的表和语句。
+
 ### 4 深入浅出索引
 
 **回表**
