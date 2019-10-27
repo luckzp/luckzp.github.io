@@ -45,5 +45,43 @@ tags: Mysql
   delete; X 锁，Gap 锁
   ```
 
-  
+  读操作通常加共享锁（Share locks，S锁，又叫读锁），写操作加排它锁（Exclusive locks，X锁，又叫写锁）；加了共享锁的记录，其他事务也可以读，但不能写；加了排它锁的记录，其他事务既不能读，也不能写。 
 
+### 9 普通索引和唯一索引，应该怎么选择？
+
+Update语句普通索引会用到change buffer 减少磁盘IO，先把数据记录到change buffer,然后当查询的时候触发merge将数据同步到磁盘上，从而达到比唯一索引快的目的。但是针对于更新完后，立即访问对应的数据页，会增加了change buffer维护代价。
+
+### 13 为什么表数据删掉一半，表文件大小不变？
+
+delete删除数据，但是实际上数据页并没有被删除，而是留着被复用。如果要减小文件大小通过 optimize table t 。通过如下程序实验，先通过存储过程idata新增数据然后查询表文件大小，后delete删除后发现表文件大小没变，最后通过optimize table t 来减少了表文件大小。
+
+```sql
+begin
+declare i int;
+set i=1000;
+while(i<=10000)do
+insert into user values(i, i);
+set i=i+1;
+end while;
+end
+```
+
+```sql
+select concat(round(sum(DATA_LENGTH/1024/1024),2),'M') from tables;
+CALL idata();
+select concat(round(sum(DATA_LENGTH/1024/1024),2),'M') from tables;
+DELETE FROM `user` where user_id > 6;
+select concat(round(sum(DATA_LENGTH/1024/1024),2),'M') from tables;
+optimize table `user`;
+```
+
+### 14 count 这么慢，我该怎么办？
+
+count(*) mysql已经做了优化，不取值直接计算行数。
+
+### 临时表
+
+建表语法是 create temporary table …。
+
+临时表只能被创建它的 session 访问，所以在这个 session 结束的时候，会自动删除
+临时表。
