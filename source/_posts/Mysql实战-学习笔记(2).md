@@ -79,7 +79,7 @@ optimize table `user`;
 
 count(*) mysql已经做了优化，不取值直接计算行数。
 
-### 临时表
+### 15 临时表
 
 建表语法是 create temporary table …。
 
