@@ -81,7 +81,11 @@ count(*) mysql已经做了优化，不取值直接计算行数。
 
 ### 15 临时表
 
-建表语法是 create temporary table …。
+建表语法是 
+
+```sql
+create temporary table …
+```
 
 临时表只能被创建它的 session 访问，所以在这个 session 结束的时候，会自动删除
 临时表。
