@@ -1,0 +1,28 @@
+language: node_js
+node_js: stable
+
+# 指定博客源码分支，因人而异。hexo博客源码托管在独立repo则不用设置此项
+branches:
+  only:
+    - hexo 
+
+
+# Start: Build Lifecycle
+install:
+  - npm install
+  - npm install hexo-deployer-git --save
+
+
+
+before_script:
+  - git config user.name "luckzp"
+  - git config user.email "245527922@qq.com"
+  - sed -i'' "s~https://github.com/luckzp/luckzp.github.io.git~https://${GH_TOKEN}@github.com/luckzp/luckzp.github.io.git~" _config.yml
+
+
+script:
+  - hexo clean
+  - hexo g
+  - hexo d
+
+# E: Build LifeCycle
