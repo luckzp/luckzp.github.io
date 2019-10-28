@@ -75,10 +75,6 @@ select concat(round(sum(DATA_LENGTH/1024/1024),2),'M') from tables;
 optimize table `user`;
 ```
 
-### 14 count 这么慢，我该怎么办？
-
-count(*) mysql已经做了优化，不取值直接计算行数。
-
 ### 15 临时表
 
 建表语法是 
@@ -87,5 +83,4 @@ count(*) mysql已经做了优化，不取值直接计算行数。
 create temporary table …
 ```
 
-临时表只能被创建它的 session 访问，所以在这个 session 结束的时候，会自动删除
-临时表。
+临时表只能被创建它的 session 访问，所以在这个 session 结束的时候，会自动删除临时表。
