@@ -76,6 +76,13 @@ deploy:
   repository: https://github.com/luckzp/luckzp.github.io.git
   branch: master
 
+# search   
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+
 jsonContent:
     meta: false
     pages: false
