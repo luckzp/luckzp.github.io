@@ -76,6 +76,7 @@ deploy:
   repository: https://github.com/luckzp/luckzp.github.io.git
   branch: master
 
+
 # search   
 search:
   path: search.xml
