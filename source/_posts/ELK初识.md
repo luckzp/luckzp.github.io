@@ -102,6 +102,12 @@ output {
 }
 ```
 
+在logstash当前目录下启动logstash
+
+```shell
+bin/logstash -f logstash.conf
+```
+
 ### 3. 用sql语句查询elasticsearch
 
 安装的elasticsearch是7.5.2版本，可以用sql语句查询elasticsearch。
@@ -114,3 +120,15 @@ POST /_sql?format=txt
 ```
 
 ![微信截图_20200209223923.png](http://ww1.sinaimg.cn/large/aacc02d8gy1gbqj3fulqgj211h0er0vp.jpg)
+
+SQL转DSL
+
+```
+POST /_sql/translate?format=txt
+{
+    "query": "SELECT *  FROM mobile_index WHERE mobile like '%760714206%'"
+}
+
+```
+
+![DSL.png](http://ww1.sinaimg.cn/large/aacc02d8ly1gckaw3oez9j212b0gp759.jpg)
