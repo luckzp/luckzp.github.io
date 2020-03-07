@@ -2,11 +2,24 @@
 layout: post
 title: "JVM内存分区"
 date: 2019-5-21 11:14:07
-tags: 
-	- JAVA
+tags: Java
 ---
 
 #### 1. JVM的内存模型
+
+**线程私有：**
+
+栈（方法栈）：线程在执行方法的时候会创建一个栈帧，栈帧包含：局部变量表，操作数栈，动态链接（与其他方法相链接），方法出口等信息。
+
+本地方法栈：与栈类型，不同点是执行native方法。
+
+程序计数器：保存当前字节码的位置
+
+**线程共享：**
+
+堆：由垃圾回收器管理。
+
+方法区：用以存储加载类的信息，常量，静态变量。JDK8以前，方法区是在堆永久代中，JDK8及以后取消了永久代，方法区挪到直接内存MetaSpace中。
 
 ![](http://ww1.sinaimg.cn/large/aacc02d8ly1g2v0u0kga5j20jv0dnmzd.jpg)
 
@@ -14,18 +27,32 @@ tags:
 
 局部变量存在虚拟机栈中，常量存在方法区中，成员变量则随着对象一起存在堆中。
 
-虚拟机栈存的是方法，每个方法包括：局部变量表，操作数栈，动态链接（与其他方法相链接），出口。
-
 Java 堆从 GC 的角度还可以细分为: 新生代( Eden 区 、 From Survivor 区 和 To Survivor 区 )和老年
 代。
+
+堆：
+
+-Xms: 堆的最小值
+
+-Xmx: 堆的最大值
+
+-XX:NewSize: 新生代最小值
+
+-XX:MaxNewSize: 新生代最大值
+
+新生代：Eden:From:To = 8:1:1
+
+永久代：
+
+jdk1.7及以前： -XX:PermSize -XX:MaxPermSize
+
+jdk1.8以后：-XX:MetaspaceSize -XX:MaxMetaspaceSize
 
 ![](http://ww1.sinaimg.cn/large/aacc02d8ly1g2v1049rtij20ir05n3zt.jpg)
 
 ![](http://ww1.sinaimg.cn/large/aacc02d8ly1fxuyutofxmj20vw0lidrd.jpg)
 
 
-
-![](http://ww1.sinaimg.cn/large/aacc02d8ly1fxuyvjd0o1j20qr0fddju.jpg)
 
 #### 2. 垃圾回收算法
 
@@ -62,14 +89,13 @@ Generation)。老生代的特点是每次垃圾回收时只有少量对象需要
 
 **新生代：复制算法** 
 
-因为新生代中每次垃圾回收都要
-回收大部分对象，即要复制的操作比较少，但通常并不是按照 1：1 来划分新生代。一般将新生代
-划分为一块较大的 Eden 空间和两个较小的 Survivor 空间(From Space, To Space)，每次使用
-Eden 空间和其中的一块 Survivor 空间，当进行回收时，将该两块空间中还存活的对象复制到另
-一块 Survivor 空间中。
+当Eden区域内存不够的时候触发MinorGC,MinorGC采用复制算法。因为新生代中每次垃圾回收都要回收大部分对象，即要复制的操作比较少。
 
-每次垃圾收集都能发现大批对象已死, 只有少量存活. 因此选用复制算法, 只需要付出少量
-存活对象的复制成本就可以完成收集.
+- Eden, From -> To 
+- 清空 Eden, From
+- To和From互换
+
+当老年代空间不够用时，触发FullGC。
 
 **老年代：压缩算法**
 
