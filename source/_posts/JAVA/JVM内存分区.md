@@ -19,19 +19,6 @@ tags: Java
 
 堆：由垃圾回收器管理。
 
-方法区：用以存储加载类的信息，常量，静态变量。JDK8以前，方法区是在堆永久代中，JDK8及以后取消了永久代，方法区挪到直接内存MetaSpace中。
-
-![](http://ww1.sinaimg.cn/large/aacc02d8ly1g2v0u0kga5j20jv0dnmzd.jpg)
-
-<!--more-->
-
-局部变量存在虚拟机栈中，常量存在方法区中，成员变量则随着对象一起存在堆中。
-
-Java 堆从 GC 的角度还可以细分为: 新生代( Eden 区 、 From Survivor 区 和 To Survivor 区 )和老年
-代。
-
-堆：
-
 -Xms: 堆的最小值
 
 -Xmx: 堆的最大值
@@ -42,11 +29,24 @@ Java 堆从 GC 的角度还可以细分为: 新生代( Eden 区 、 From Survivo
 
 新生代：Eden:From:To = 8:1:1
 
+方法区：用以存储加载类的信息，常量，静态变量。JDK8以前，方法区是在堆永久代中，JDK8及以后取消了永久代，方法区挪到直接内存MetaSpace中。
+
 永久代：
 
 jdk1.7及以前： -XX:PermSize -XX:MaxPermSize
 
 jdk1.8以后：-XX:MetaspaceSize -XX:MaxMetaspaceSize
+
+![](http://ww1.sinaimg.cn/large/aacc02d8ly1g2v0u0kga5j20jv0dnmzd.jpg)
+
+<!--more-->
+
+局部变量存在虚拟机栈中，常量存在方法区中，成员变量则随着对象一起存在堆中。
+
+Java 堆从 GC 的角度还可以细分为: 新生代( Eden 区 、 From Survivor 区 和 To Survivor 区 )和老年
+代。
+
+
 
 ![](http://ww1.sinaimg.cn/large/aacc02d8ly1g2v1049rtij20ir05n3zt.jpg)
 
