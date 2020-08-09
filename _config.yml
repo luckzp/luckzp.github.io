@@ -10,8 +10,6 @@ author: Zhang Peng
 language: zh-CN
 timezone:
 
-
-
 admin:
   deployCommand: './hexo-deploy.sh'
 # URL
