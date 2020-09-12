@@ -22,8 +22,8 @@ before_script:
 
 
 script:
-  - hexo clean
-  - hexo g
-  - hexo d
+  - npm run start
+  - npm run server
+
 
 # E: Build LifeCycle
