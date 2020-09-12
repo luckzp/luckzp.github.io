@@ -3,7 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "hexo": {
-    "version": "5.0.0"
+    "version": "5.1.1"
+  },
+"yuqueConfig": {
+    "baseUrl": "https://www.yuque.com/api/v2",
+    "login": "u263378",
+    "repo": "qg6bn3",
+    "mdNameFormat": "title",
+    "postPath": "source/_posts",
+    "onlyPublished": false
   },
   "dependencies": {
     "hexo": "^5.0.0",

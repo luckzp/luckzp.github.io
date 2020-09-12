@@ -1,29 +1,32 @@
 ---
 title: Bean生命周期和SpringMVC的工作原理
-date: 2020-01-27 15:27:08
-tags: Java
+urlname: gsec0x
+date: 2020-09-12 12:18:44 +0800
+tags: []
+categories: []
 ---
-**Spring Bean生命周期**
 
-![SpringBean生命周期.png](http://ww1.sinaimg.cn/large/aacc02d8gy1gbb5fetvg1j20ui0i1dgz.jpg)
+---
 
-<!--more--> 
+## title: Bean 生命周期和 SpringMVC 的工作原理 date: 2020-01-27 15:27:08
 
-![实例化.png](http://ww1.sinaimg.cn/mw690/aacc02d8gy1gba3ri4qgpj20kf0f2tab.jpg)
+tags: Java
 
+**Spring Bean 生命周期**
 
+![](http://ww1.sinaimg.cn/large/aacc02d8gy1gbb5fetvg1j20ui0i1dgz.jpg#alt=SpringBean%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png)
+![](http://ww1.sinaimg.cn/mw690/aacc02d8gy1gba3ri4qgpj20kf0f2tab.jpg#alt=%E5%AE%9E%E4%BE%8B%E5%8C%96.png)
 
-![初始化.png](http://ww1.sinaimg.cn/large/aacc02d8gy1gbb536clp7j21dx0nyn1m.jpg)
+![](http://ww1.sinaimg.cn/large/aacc02d8gy1gbb536clp7j21dx0nyn1m.jpg#alt=%E5%88%9D%E5%A7%8B%E5%8C%96.png)
 
-**SpringMVC工作原理**
+**SpringMVC 工作原理**
 
-在SpringBoot启动过程中，创建了Tomcat和DispatcherServlet。
+在 SpringBoot 启动过程中，创建了 Tomcat 和 DispatcherServlet。
 
-![微信图片_20200127150113.png](http://ww1.sinaimg.cn/large/aacc02d8gy1gbb51vdrccj21cr0jxdil.jpg)
+![](http://ww1.sinaimg.cn/large/aacc02d8gy1gbb51vdrccj21cr0jxdil.jpg#alt=%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200127150113.png)
 
-当有请求时，会被DispatcherServlet#doDispatch处理，处理流程图如下：
+当有请求时，会被 DispatcherServlet#doDispatch 处理，处理流程图如下：
 
-![MVC流程图.png](http://ww1.sinaimg.cn/large/aacc02d8gy1gbb5f0ds12j20yh0dnwfs.jpg)
+![](http://ww1.sinaimg.cn/large/aacc02d8gy1gbb5f0ds12j20yh0dnwfs.jpg#alt=MVC%E6%B5%81%E7%A8%8B%E5%9B%BE.png)
 
 [实践源码](https://github.com/luckzp/SpringCode)
-

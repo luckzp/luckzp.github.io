@@ -1,18 +1,16 @@
 ---
 title: ajax学习
+urlname: gu3u8s
+date: 2018-07-03 11:51:00 +0800
 author: Zhang Peng
-tags:
-  - 前端
+tags: [前端]
 categories: []
-date: 2018-07-03 11:51:00
 ---
-Ajax是一种异步请求数据的web开发技术，对于改善用户的体验和页面性能很有帮助。简单地说，在不需要重新刷新页面的情况下，Ajax 通过异步请求加载后台数据，并在网页上呈现出来。常见运用场景有表单验证是否登入成功。
 
-<!--more--> 
-
+Ajax 是一种异步请求数据的 web 开发技术，对于改善用户的体验和页面性能很有帮助。简单地说，在不需要重新刷新页面的情况下，Ajax 通过异步请求加载后台数据，并在网页上呈现出来。常见运用场景有表单验证是否登入成功。
 需求：点击登陆按钮时，提交账号和密码给后端，异步刷新显示返回的数据。
 
-**Demo代码：**
+**Demo 代码：**
 
 ```javascript
 <script>
@@ -58,4 +56,4 @@ Ajax是一种异步请求数据的web开发技术，对于改善用户的体验�
 
 **效果图：**
 
-![](http://ww1.sinaimg.cn/large/aacc02d8ly1fxv1c35oiij20pu0a3gr3.jpg)
+![](http://ww1.sinaimg.cn/large/aacc02d8ly1fxv1c35oiij20pu0a3gr3.jpg#alt=)

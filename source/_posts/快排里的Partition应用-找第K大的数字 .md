@@ -1,12 +1,22 @@
 ---
-layout: post
-title: "快排里的Partition应用-找第K大的数字"
+title: 快排里的Partition应用-找第K大的数字 
+urlname: tsg5ce
+date: 2020-09-12 12:20:04 +0800
+tags: []
+categories: []
+---
+
+---
+
+## layout: posttitle: "快排里的 Partition 应用-找第 K 大的数字"
+
 date: 2018-01-06 15:21
 comments: true
 reward: true
-tags: 
-	- leetcode
----
+tags:
+
+- leetcode
+
 ### Partition 算法
 
 参考自：
@@ -15,11 +25,9 @@ tags:
 
 ### 挖数填坑：
 
-![](http://ww1.sinaimg.cn/large/aacc02d8ly1fxv1fmnsi4j20tv0kj45z.jpg)
+![](http://ww1.sinaimg.cn/large/aacc02d8ly1fxv1fmnsi4j20tv0kj45z.jpg#alt=)
 
-<!--more--> 
-
-```c++
+```c
 int partition(vector<int>& nums, int low, int high)
 {
     int x = nums[low];
@@ -66,7 +74,7 @@ int findKthLargest(vector<int>& nums, int k) {
 
 ### 全部代码
 
-```c++
+```c
 #include<cstdio>
 #include<vector>
 using namespace std;
@@ -90,7 +98,7 @@ int partition(vector<int>& nums, int low, int high)
     nums[i]=x;
     return i;
 }
-    
+
 int findKthLargest(vector<int>& nums, int k) {
     int begin = 0, end = nums.size();
     int target_num = 0;
