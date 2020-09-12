@@ -23,7 +23,7 @@ before_script:
 
 script:
   - cross-env YUQUE_TOKEN=$YUQUE_TOKEN npm run start
-  - npm run server
+  - hexo d
 
 
 # E: Build LifeCycle
