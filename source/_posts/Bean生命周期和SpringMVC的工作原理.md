@@ -2,28 +2,22 @@
 title: Bean生命周期和SpringMVC的工作原理
 urlname: gsec0x
 date: 2020-09-12 12:18:44 +0800
-tags: []
+tags: [Spring]
 categories: []
 ---
 
----
-
-## title: Bean 生命周期和 SpringMVC 的工作原理 date: 2020-01-27 15:27:08
-
-tags: Java
-
 **Spring Bean 生命周期**
 
-![](http://ww1.sinaimg.cn/large/aacc02d8gy1gbb5fetvg1j20ui0i1dgz.jpg#alt=SpringBean%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png)
-![](http://ww1.sinaimg.cn/mw690/aacc02d8gy1gba3ri4qgpj20kf0f2tab.jpg#alt=%E5%AE%9E%E4%BE%8B%E5%8C%96.png)
+![](http://ww1.sinaimg.cn/large/aacc02d8gy1gbb5fetvg1j20ui0i1dgz.jpg#align=left&display=inline&height=649&margin=%5Bobject%20Object%5D&originHeight=649&originWidth=1098&status=done&style=none&width=1098)
+![](http://ww1.sinaimg.cn/mw690/aacc02d8gy1gba3ri4qgpj20kf0f2tab.jpg#align=left&display=inline&height=509&margin=%5Bobject%20Object%5D&originHeight=509&originWidth=690&status=done&style=none&width=690)
 
-![](http://ww1.sinaimg.cn/large/aacc02d8gy1gbb536clp7j21dx0nyn1m.jpg#alt=%E5%88%9D%E5%A7%8B%E5%8C%96.png)
+![](http://ww1.sinaimg.cn/large/aacc02d8gy1gbb536clp7j21dx0nyn1m.jpg#align=left&display=inline&height=862&margin=%5Bobject%20Object%5D&originHeight=862&originWidth=1797&status=done&style=none&width=1797)
 
 **SpringMVC 工作原理**
 
 在 SpringBoot 启动过程中，创建了 Tomcat 和 DispatcherServlet。
 
-![](http://ww1.sinaimg.cn/large/aacc02d8gy1gbb51vdrccj21cr0jxdil.jpg#alt=%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200127150113.png)
+![](http://ww1.sinaimg.cn/large/aacc02d8gy1gbb51vdrccj21cr0jxdil.jpg#align=left&display=inline&height=717&margin=%5Bobject%20Object%5D&originHeight=717&originWidth=1755&status=done&style=none&width=1755)
 
 当有请求时，会被 DispatcherServlet#doDispatch 处理，处理流程图如下：
 
