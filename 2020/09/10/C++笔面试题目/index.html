@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta name="referrer" content="no-referrer" />
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"luckzp.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="layout: posttitle: “C 笔面试题目”date: 2017-09-18 16:42comments: truereward: truetags:  C  1.函数指针a.获取函数地址 12process(think);&#x2F;&#x2F;passes address of think() to process()thought(think);&#x2F;&#x2F;passes return value of t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++笔面试题目">
+<meta property="og:url" content="https://luckzp.github.io/2020/09/10/C++%E7%AC%94%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/index.html">
+<meta property="og:site_name" content="ZhangPeng">
+<meta property="og:description" content="layout: posttitle: “C 笔面试题目”date: 2017-09-18 16:42comments: truereward: truetags:  C  1.函数指针a.获取函数地址 12process(think);&#x2F;&#x2F;passes address of think() to process()thought(think);&#x2F;&#x2F;passes return value of t">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wx2.sinaimg.cn/large/aacc02d8ly1fxvoewmi1hj20rp0ludnv.jpg#alt=image">
+<meta property="article:published_time" content="2020-09-10T14:40:09.000Z">
+<meta property="article:modified_time" content="2021-06-14T02:12:39.856Z">
+<meta property="article:author" content="Zhang Peng">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wx2.sinaimg.cn/large/aacc02d8ly1fxvoewmi1hj20rp0ludnv.jpg#alt=image">
+
+<link rel="canonical" href="https://luckzp.github.io/2020/09/10/C++%E7%AC%94%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>C++笔面试题目 | ZhangPeng</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ZhangPeng</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">To be what you want to be</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://luckzp.github.io/2020/09/10/C++%E7%AC%94%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhang Peng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangPeng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++笔面试题目
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-10 14:40:09" itemprop="dateCreated datePublished" datetime="2020-09-10T14:40:09+00:00">2020-09-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-06-14 02:12:39" itemprop="dateModified" datetime="2021-06-14T02:12:39+00:00">2021-06-14</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <hr>
+<h2 id="layout-posttitle-“C-笔面试题目”"><a href="#layout-posttitle-“C-笔面试题目”" class="headerlink" title="layout: posttitle: “C 笔面试题目”"></a>layout: posttitle: “C 笔面试题目”</h2><p>date: 2017-09-18 16:42<br>comments: true<br>reward: true<br>tags:</p>
+<ul>
+<li>C</li>
+</ul>
+<h3 id="1-函数指针"><a href="#1-函数指针" class="headerlink" title="1.函数指针"></a>1.函数指针</h3><p>a.获取函数地址</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">process(think);<span class="comment">//passes address of think() to process()</span></span><br><span class="line">thought(think);<span class="comment">//passes return value of think to thought()</span></span><br></pre></td></tr></table></figure>
+
+<p>b.声明函数指针</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">pam</span><span class="params">(<span class="keyword">int</span>)</span></span>;<span class="comment">//prototype</span></span><br><span class="line"><span class="keyword">double</span> (*pf)(<span class="keyword">int</span>);<span class="comment">//pf points to a function that takes</span></span><br><span class="line">				<span class="comment">//one int argument and that</span></span><br><span class="line">				<span class="comment">//return type double</span></span><br><span class="line">pf = pam;<span class="comment">//pf now points to the pam() function</span></span><br></pre></td></tr></table></figure>
+
+<p>为提供正确的运算符优先级，必须在声明中使用括号将* pf 括起。括号的优先级比*运算符高。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> (*pf)(<span class="keyword">int</span>);<span class="comment">//pf points to a function that returns double</span></span><br><span class="line"><span class="function"><span class="keyword">double</span> *<span class="title">pf</span><span class="params">(<span class="keyword">int</span>)</span></span>; <span class="comment">//pf() a function that return a pointer-to-double</span></span><br></pre></td></tr></table></figure>
+
+<p>注意，pam()的参数列表和返回类型必须与 pf 相同。如果不相同，编译器将拒绝这种赋值：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">ned</span><span class="params">(<span class="keyword">double</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ted</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="keyword">double</span> (*pf)(<span class="keyword">int</span>);</span><br><span class="line">pf = ned;<span class="comment">//invalid -- mismatched signature</span></span><br><span class="line">pf = ted;<span class="comment">//invalid -- mismatched return type</span></span><br></pre></td></tr></table></figure>
+
+<p>c.使用指针来调用函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">pam</span><span class="params">(<span class="keyword">int</span>)</span></span>;<span class="comment">//prototype</span></span><br><span class="line"><span class="keyword">double</span> (*pf)(<span class="keyword">int</span>);<span class="comment">//pf points to a function that takes</span></span><br><span class="line">				<span class="comment">//one int argument and that</span></span><br><span class="line">				<span class="comment">//return type double</span></span><br><span class="line">pf = pam;<span class="comment">//pf now points to the pam() function</span></span><br><span class="line"><span class="keyword">double</span> x = pam(<span class="number">4</span>);<span class="comment">//call pam() using the function name</span></span><br><span class="line"><span class="keyword">double</span> y = (*pf)(<span class="number">5</span>);<span class="comment">//call pam() using the pointer pf</span></span><br><span class="line"><span class="keyword">double</span> y = pf(<span class="number">5</span>);<span class="comment">//also call pam() using the pointer pf</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-虚函数工作原理："><a href="#2-虚函数工作原理：" class="headerlink" title="2.虚函数工作原理："></a>2.虚函数工作原理：</h3><p>编译器处理虚函数的方法是：给每个对象添加一个隐藏成员。隐藏成员中保存了一个指向函数地址数组的指针。这种数组称为虚函数表(virtual function table，vtbl)。<strong>虚函数表中存储了为类对象进行声明的虚函数地址。</strong></p>
+<p><img src="https://wx2.sinaimg.cn/large/aacc02d8ly1fxvoewmi1hj20rp0ludnv.jpg#alt=image"></p>
+<h3 id="3-结构体内存对齐"><a href="#3-结构体内存对齐" class="headerlink" title="3.结构体内存对齐"></a>3.<strong>结构体内存对齐</strong></h3><h4 id="1-什么是内存对齐"><a href="#1-什么是内存对齐" class="headerlink" title="1.什么是内存对齐"></a><strong>1.什么是内存对齐</strong></h4><h4 id="假设我们同时声明两个变量：char-a-short-b-用-amp-（取地址符号）观察变量-a，b-的地址的话，我们会发现（以-16-位-CPU-为例）：如果-a-的地址是-0x0000，那么-b-的地址将会是-0x0002-或者是-0x0004。那么就出现这样一个问题：0x0001-这个地址没有被使用，那它干什么去了？-答案就是它确实没被使用。-因为-CPU-每次都是从以-2-字节（16-位-CPU）或是-4-字节（32-位-CPU）的整数倍的内存地址中读进数据的。如果变量-b-的地址是-0x0001-的话，那么-CPU-就需要先从-0x0000-中读取一个-short，取它的高-8-位放入-b-的低-8-位，然后再从-0x0002-中读取下一个-short，取它的低-8-位放入-b-的高-8-位中，这样的话，为了获得-b-的值，CPU-需要进行了两次读操作。"><a href="#假设我们同时声明两个变量：char-a-short-b-用-amp-（取地址符号）观察变量-a，b-的地址的话，我们会发现（以-16-位-CPU-为例）：如果-a-的地址是-0x0000，那么-b-的地址将会是-0x0002-或者是-0x0004。那么就出现这样一个问题：0x0001-这个地址没有被使用，那它干什么去了？-答案就是它确实没被使用。-因为-CPU-每次都是从以-2-字节（16-位-CPU）或是-4-字节（32-位-CPU）的整数倍的内存地址中读进数据的。如果变量-b-的地址是-0x0001-的话，那么-CPU-就需要先从-0x0000-中读取一个-short，取它的高-8-位放入-b-的低-8-位，然后再从-0x0002-中读取下一个-short，取它的低-8-位放入-b-的高-8-位中，这样的话，为了获得-b-的值，CPU-需要进行了两次读操作。" class="headerlink" title="假设我们同时声明两个变量：char a;short b;用&amp;（取地址符号）观察变量 a，b 的地址的话，我们会发现（以 16 位 CPU 为例）：如果 a 的地址是 0x0000，那么 b 的地址将会是 0x0002 或者是 0x0004。那么就出现这样一个问题：0x0001 这个地址没有被使用，那它干什么去了？ 答案就是它确实没被使用。 因为 CPU 每次都是从以 2 字节（16 位 CPU）或是 4 字节（32 位 CPU）的整数倍的内存地址中读进数据的。如果变量 b 的地址是 0x0001 的话，那么 CPU 就需要先从 0x0000 中读取一个 short，取它的高 8 位放入 b 的低 8 位，然后再从 0x0002 中读取下一个 short，取它的低 8 位放入 b 的高 8 位中，这样的话，为了获得 b 的值，CPU 需要进行了两次读操作。"></a>假设我们同时声明两个变量：char a;short b;用&amp;（取地址符号）观察变量 a，b 的地址的话，我们会发现（以 16 位 CPU 为例）：如果 a 的地址是 0x0000，那么 b 的地址将会是 0x0002 或者是 0x0004。那么就出现这样一个问题：0x0001 这个地址没有被使用，那它干什么去了？ 答案就是它确实没被使用。 因为 CPU 每次都是从以 2 字节（16 位 CPU）或是 4 字节（32 位 CPU）的整数倍的内存地址中读进数据的。如果变量 b 的地址是 0x0001 的话，那么 CPU 就需要先从 0x0000 中读取一个 short，取它的高 8 位放入 b 的低 8 位，然后再从 0x0002 中读取下一个 short，取它的低 8 位放入 b 的高 8 位中，这样的话，为了获得 b 的值，CPU 需要进行了两次读操作。</h4><p>但是如果 b 的地址为 0x0002，那么 CPU 只需一次读操作就可以获得 b 的值了。<strong>所以编译器为了优化代码，往往会根据变量的大小，将其指定到合适的位置，即称为内存对齐（对变量 b 做内存对齐，a、b 之间的内存被浪费，a 并未多占内存）。</strong></p>
+<h4 id="2-结构体内存对齐规则（请记住三条内存规则-在没有-pragam-pack-宏的情况下）"><a href="#2-结构体内存对齐规则（请记住三条内存规则-在没有-pragam-pack-宏的情况下）" class="headerlink" title="2.结构体内存对齐规则（请记住三条内存规则(在没有#pragam pack 宏的情况下）"></a><strong>2.结构体内存对齐规则（请记住三条内存规则(在没有#pragam pack 宏的情况下）</strong></h4><p>结构体所占用的内存与其成员在结构体中的声明顺序有关，其成员的内存对齐规则如下：</p>
+<p>（1）每个成员分别按自己的对齐字节数和 PPB（指定的对齐字节数，32 位机默认为 4）两个字节数最小的那个对齐，这样可以最小化长度。如在 32bit 的机器上，int 的大小为 4，因此 int 存储的位置都是 4 的整数倍的位置开始存储。</p>
+<p>（2）复杂类型(如结构)的默认对齐方式是它最长的成员的对齐方式，这样在成员是复杂类型时，结构体数组的时候，可以最小化长度。</p>
+<p>（3）结构体对齐后的长度必须是成员中最大的对齐参数（PPB）的整数倍，这样在处理数组时可以保证每一项都边界对齐。</p>
+<p>（4）结构体作为数据成员的对齐规则：在一个 struct 中包含另一个 struct，内部 struct 应该以它的最大数据成员大小的整数倍开始存储。如 struct A 中包含 struct B, struct B 中包含数据成员 char, int, double，则 struct B 应该以 sizeof(double)=8 的整数倍为起始地址。</p>
+<h4 id="3-实例演示："><a href="#3-实例演示：" class="headerlink" title="3.实例演示："></a><strong>3.实例演示：</strong></h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">char</span> a;　　　<span class="comment">//内存位置:  [0]</span></span><br><span class="line"><span class="keyword">double</span> b;　  <span class="comment">// 内存位置: [8]...[15]</span></span><br><span class="line"><span class="keyword">int</span> c;　　　　<span class="comment">// 内存位置: [16]...[19]　　----　　规则1</span></span><br><span class="line">&#125;;　　　　　　　 <span class="comment">// 内存大小：sizeof(A) = (1+7) + 8 + (4+4) = 24, 补齐[20]...[23]　　----　　规则3</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">int</span> a,　　　　<span class="comment">// 内存位置: [0]...[3]</span></span><br><span class="line">A b,　    　　<span class="comment">// 内存位置: [8]...[31]　　----　　规则2</span></span><br><span class="line"><span class="keyword">char</span> c,　　　<span class="comment">// 内存位置: [32]</span></span><br><span class="line">&#125;;　　　　　　　  <span class="comment">// 内存大小：sizeof(B) = (4+4) + 24 + (1+7) = 40, 补齐[33]...[39]</span></span><br></pre></td></tr></table></figure>
+
+<p>*注释：(1+7)表示该数据成员大小为 1，补齐 7 位；(4+4)同理。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/10/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" rel="prev" title="线程池">
+      <i class="fa fa-chevron-left"></i> 线程池
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/10/%E9%93%BE%E8%A1%A8/" rel="next" title="链表">
+      链表 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#layout-posttitle-%E2%80%9CC-%E7%AC%94%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E2%80%9D"><span class="nav-number">1.</span> <span class="nav-text">layout: posttitle: “C 笔面试题目”</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88"><span class="nav-number">1.1.</span> <span class="nav-text">1.函数指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%99%9A%E5%87%BD%E6%95%B0%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">2.虚函数工作原理：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%BB%93%E6%9E%84%E4%BD%93%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90"><span class="nav-number">1.3.</span> <span class="nav-text">3.结构体内存对齐</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.什么是内存对齐</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%81%87%E8%AE%BE%E6%88%91%E4%BB%AC%E5%90%8C%E6%97%B6%E5%A3%B0%E6%98%8E%E4%B8%A4%E4%B8%AA%E5%8F%98%E9%87%8F%EF%BC%9Achar-a-short-b-%E7%94%A8-amp-%EF%BC%88%E5%8F%96%E5%9C%B0%E5%9D%80%E7%AC%A6%E5%8F%B7%EF%BC%89%E8%A7%82%E5%AF%9F%E5%8F%98%E9%87%8F-a%EF%BC%8Cb-%E7%9A%84%E5%9C%B0%E5%9D%80%E7%9A%84%E8%AF%9D%EF%BC%8C%E6%88%91%E4%BB%AC%E4%BC%9A%E5%8F%91%E7%8E%B0%EF%BC%88%E4%BB%A5-16-%E4%BD%8D-CPU-%E4%B8%BA%E4%BE%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E6%9E%9C-a-%E7%9A%84%E5%9C%B0%E5%9D%80%E6%98%AF-0x0000%EF%BC%8C%E9%82%A3%E4%B9%88-b-%E7%9A%84%E5%9C%B0%E5%9D%80%E5%B0%86%E4%BC%9A%E6%98%AF-0x0002-%E6%88%96%E8%80%85%E6%98%AF-0x0004%E3%80%82%E9%82%A3%E4%B9%88%E5%B0%B1%E5%87%BA%E7%8E%B0%E8%BF%99%E6%A0%B7%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%9A0x0001-%E8%BF%99%E4%B8%AA%E5%9C%B0%E5%9D%80%E6%B2%A1%E6%9C%89%E8%A2%AB%E4%BD%BF%E7%94%A8%EF%BC%8C%E9%82%A3%E5%AE%83%E5%B9%B2%E4%BB%80%E4%B9%88%E5%8E%BB%E4%BA%86%EF%BC%9F-%E7%AD%94%E6%A1%88%E5%B0%B1%E6%98%AF%E5%AE%83%E7%A1%AE%E5%AE%9E%E6%B2%A1%E8%A2%AB%E4%BD%BF%E7%94%A8%E3%80%82-%E5%9B%A0%E4%B8%BA-CPU-%E6%AF%8F%E6%AC%A1%E9%83%BD%E6%98%AF%E4%BB%8E%E4%BB%A5-2-%E5%AD%97%E8%8A%82%EF%BC%8816-%E4%BD%8D-CPU%EF%BC%89%E6%88%96%E6%98%AF-4-%E5%AD%97%E8%8A%82%EF%BC%8832-%E4%BD%8D-CPU%EF%BC%89%E7%9A%84%E6%95%B4%E6%95%B0%E5%80%8D%E7%9A%84%E5%86%85%E5%AD%98%E5%9C%B0%E5%9D%80%E4%B8%AD%E8%AF%BB%E8%BF%9B%E6%95%B0%E6%8D%AE%E7%9A%84%E3%80%82%E5%A6%82%E6%9E%9C%E5%8F%98%E9%87%8F-b-%E7%9A%84%E5%9C%B0%E5%9D%80%E6%98%AF-0x0001-%E7%9A%84%E8%AF%9D%EF%BC%8C%E9%82%A3%E4%B9%88-CPU-%E5%B0%B1%E9%9C%80%E8%A6%81%E5%85%88%E4%BB%8E-0x0000-%E4%B8%AD%E8%AF%BB%E5%8F%96%E4%B8%80%E4%B8%AA-short%EF%BC%8C%E5%8F%96%E5%AE%83%E7%9A%84%E9%AB%98-8-%E4%BD%8D%E6%94%BE%E5%85%A5-b-%E7%9A%84%E4%BD%8E-8-%E4%BD%8D%EF%BC%8C%E7%84%B6%E5%90%8E%E5%86%8D%E4%BB%8E-0x0002-%E4%B8%AD%E8%AF%BB%E5%8F%96%E4%B8%8B%E4%B8%80%E4%B8%AA-short%EF%BC%8C%E5%8F%96%E5%AE%83%E7%9A%84%E4%BD%8E-8-%E4%BD%8D%E6%94%BE%E5%85%A5-b-%E7%9A%84%E9%AB%98-8-%E4%BD%8D%E4%B8%AD%EF%BC%8C%E8%BF%99%E6%A0%B7%E7%9A%84%E8%AF%9D%EF%BC%8C%E4%B8%BA%E4%BA%86%E8%8E%B7%E5%BE%97-b-%E7%9A%84%E5%80%BC%EF%BC%8CCPU-%E9%9C%80%E8%A6%81%E8%BF%9B%E8%A1%8C%E4%BA%86%E4%B8%A4%E6%AC%A1%E8%AF%BB%E6%93%8D%E4%BD%9C%E3%80%82"><span class="nav-number">1.3.2.</span> <span class="nav-text">假设我们同时声明两个变量：char a;short b;用&amp;（取地址符号）观察变量 a，b 的地址的话，我们会发现（以 16 位 CPU 为例）：如果 a 的地址是 0x0000，那么 b 的地址将会是 0x0002 或者是 0x0004。那么就出现这样一个问题：0x0001 这个地址没有被使用，那它干什么去了？ 答案就是它确实没被使用。 因为 CPU 每次都是从以 2 字节（16 位 CPU）或是 4 字节（32 位 CPU）的整数倍的内存地址中读进数据的。如果变量 b 的地址是 0x0001 的话，那么 CPU 就需要先从 0x0000 中读取一个 short，取它的高 8 位放入 b 的低 8 位，然后再从 0x0002 中读取下一个 short，取它的低 8 位放入 b 的高 8 位中，这样的话，为了获得 b 的值，CPU 需要进行了两次读操作。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E7%BB%93%E6%9E%84%E4%BD%93%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E8%A7%84%E5%88%99%EF%BC%88%E8%AF%B7%E8%AE%B0%E4%BD%8F%E4%B8%89%E6%9D%A1%E5%86%85%E5%AD%98%E8%A7%84%E5%88%99-%E5%9C%A8%E6%B2%A1%E6%9C%89-pragam-pack-%E5%AE%8F%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%EF%BC%89"><span class="nav-number">1.3.3.</span> <span class="nav-text">2.结构体内存对齐规则（请记住三条内存规则(在没有#pragam pack 宏的情况下）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%AE%9E%E4%BE%8B%E6%BC%94%E7%A4%BA%EF%BC%9A"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.实例演示：</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhang Peng</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhang Peng</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyAOxPsO3R2S_FEcgmCicMAdmH2WL4dcqQw',
+      projectId: 'flash-spark-160014'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

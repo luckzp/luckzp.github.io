@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta name="referrer" content="no-referrer" />
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"luckzp.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="ELK 是Elasticsearch，Logstash，Kibana 三个组件组合起来的缩写。 Elasticsearch 是搜索引擎，Logstash 是收集数据输出到 elasticsearch 中。Kibana 是Elasticsearch 数据的可视化，类比于 navicat 是 Mysql 数据的可视化。 1. ElasticSearch 概念画一个对比图来类比传统关系型数据库：  关系">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ELK初识">
+<meta property="og:url" content="https://luckzp.github.io/2020/09/12/ELK%E5%88%9D%E8%AF%86/index.html">
+<meta property="og:site_name" content="ZhangPeng">
+<meta property="og:description" content="ELK 是Elasticsearch，Logstash，Kibana 三个组件组合起来的缩写。 Elasticsearch 是搜索引擎，Logstash 是收集数据输出到 elasticsearch 中。Kibana 是Elasticsearch 数据的可视化，类比于 navicat 是 Mysql 数据的可视化。 1. ElasticSearch 概念画一个对比图来类比传统关系型数据库：  关系">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/aacc02d8gy1gbqj3fulqgj211h0er0vp.jpg#alt=%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200209223923.png">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/aacc02d8ly1gckaw3oez9j212b0gp759.jpg#alt=DSL.png">
+<meta property="article:published_time" content="2020-09-12T04:18:49.000Z">
+<meta property="article:modified_time" content="2021-06-14T02:12:39.588Z">
+<meta property="article:author" content="Zhang Peng">
+<meta property="article:tag" content="运维">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/aacc02d8gy1gbqj3fulqgj211h0er0vp.jpg#alt=%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200209223923.png">
+
+<link rel="canonical" href="https://luckzp.github.io/2020/09/12/ELK%E5%88%9D%E8%AF%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ELK初识 | ZhangPeng</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ZhangPeng</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">To be what you want to be</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://luckzp.github.io/2020/09/12/ELK%E5%88%9D%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhang Peng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangPeng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ELK初识
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-12 04:18:49" itemprop="dateCreated datePublished" datetime="2020-09-12T04:18:49+00:00">2020-09-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-06-14 02:12:39" itemprop="dateModified" datetime="2021-06-14T02:12:39+00:00">2021-06-14</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>ELK 是<strong>E</strong>lasticsearch，<strong>L</strong>ogstash，<strong>K</strong>ibana 三个组件组合起来的缩写。</p>
+<p><strong>E</strong>lasticsearch 是搜索引擎，<strong>L</strong>ogstash 是收集数据输出到 elasticsearch 中。<strong>K</strong>ibana 是<strong>E</strong>lasticsearch 数据的可视化，类比于 navicat 是 Mysql 数据的可视化。</p>
+<h3 id="1-ElasticSearch-概念"><a href="#1-ElasticSearch-概念" class="headerlink" title="1. ElasticSearch 概念"></a>1. ElasticSearch 概念</h3><p>画一个对比图来类比传统关系型数据库：</p>
+<ul>
+<li>关系型数据库 -&gt; Databases(库) -&gt; Tables(表) -&gt; Rows(行) -&gt; Columns(列)。</li>
+<li>Elasticsearch -&gt; Indeces(索引) -&gt; Types(类型) -&gt; Documents(文档) -&gt; Fields(属性)。</li>
+</ul>
+<p><strong>索引</strong></p>
+<p>一个索引(index)就像是传统关系数据库中的数据库，它是相关文档存储的地方。</p>
+<p><strong>文档</strong></p>
+<p>就是一个对象 Json 串。</p>
+<p><strong>分片（shards）</strong></p>
+<p>索引可能存储大量可能超过单个节点的硬件限制的数据，需要将索引细分，细分后的部分是分片。</p>
+<p><strong>副本（Replicasedit）</strong></p>
+<p>副本，是对分片的复制。</p>
+<p><strong>倒排索引</strong></p>
+<p>就是通过文档中的字段反查到文档的 id。</p>
+<p>ES 的 JSON 文档中的每个字段，都有自己的倒排索引。</p>
+<p>组成：单词字典（单词到倒排列表的关系）和倒排列表（记录了单词对应文档的结合）。</p>
+<h3 id="2-搭建-ELK-环境读取数据库"><a href="#2-搭建-ELK-环境读取数据库" class="headerlink" title="2. 搭建 ELK 环境读取数据库"></a>2. 搭建 ELK 环境读取数据库</h3><ol>
+<li>下载版本相同的 elasticsearch，logstash，kibana。</li>
+<li>logstash 安装 logstash-jdbc-input 插件。</li>
+<li>配置 logstash.conf</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">input &#123;</span><br><span class="line">  #beats &#123;</span><br><span class="line">  #  port =&gt; 5044</span><br><span class="line">  #&#125;</span><br><span class="line">  jdbc &#123;</span><br><span class="line">      # 数据库  数据库名称为elk，表名为book_table</span><br><span class="line">      jdbc_connection_string =&gt; &quot;jdbc:mysql://127.0.0.1:3306/tmall_springboot?characterEncoding=UTF-8&quot;</span><br><span class="line">      # 用户名密码</span><br><span class="line">      jdbc_user =&gt; &quot;root&quot;</span><br><span class="line">      jdbc_password =&gt; &quot;123456&quot;</span><br><span class="line">      # jar包的位置</span><br><span class="line">      jdbc_driver_library =&gt; &quot;E:\ELK\logstash-7.5.2\mysql-connector-java-5.1.30.jar&quot;</span><br><span class="line">      # mysql的Driver</span><br><span class="line">      jdbc_driver_class =&gt; &quot;com.mysql.jdbc.Driver&quot;</span><br><span class="line">      jdbc_paging_enabled =&gt; &quot;true&quot;</span><br><span class="line">      jdbc_page_size =&gt; &quot;100&quot;</span><br><span class="line">      #statement_filepath =&gt; &quot;E:\logstash-7.3.0\config\viewlogs.sql&quot;</span><br><span class="line">      statement =&gt; &quot;select * from category where id &gt; :sql_last_value&quot;</span><br><span class="line">      schedule =&gt; &quot;* * * * *&quot;</span><br><span class="line">      #是否记录上次执行结果, 如果为真,将会把上次执行到的 tracking_column 字段的值记录下来,保存到 last_run_metadata_path 指定的文件中</span><br><span class="line">      record_last_run =&gt; true</span><br><span class="line"></span><br><span class="line">      #是否需要记录某个column 的值,如果 record_last_run 为真,可以自定义我们需要 track 的 column 名称，此时该参数就要为 true. 否则默认 track 的是 timestamp 的值.</span><br><span class="line">      use_column_value =&gt; true</span><br><span class="line"></span><br><span class="line">      #如果 use_column_value 为真,需配置此参数. track 的数据库 column 名,该 column 必须是递增的.比如：ID.</span><br><span class="line">      tracking_column =&gt; id</span><br><span class="line"></span><br><span class="line">      #指定文件,来记录上次执行到的 tracking_column 字段的值</span><br><span class="line">      #比如上次数据库有 10000 条记录,查询完后该文件中就会有数字 10000 这样的记录,下次执行 SQL 查询可以从 10001 条处开始.</span><br><span class="line">      #我们只需要在 SQL 语句中 WHERE MY_ID &gt; :last_sql_value 即可. 其中 :last_sql_value 取得就是该文件中的值(10000).</span><br><span class="line">      #last_run_metadata_path =&gt; &quot;E:\ELK\logstash-7.5.2\viewlogs&quot;</span><br><span class="line"></span><br><span class="line">      #是否清除 last_run_metadata_path 的记录,如果为真那么每次都相当于从头开始查询所有的数据库记录</span><br><span class="line">      clean_run =&gt; false</span><br><span class="line"></span><br><span class="line">      #是否将 column 名称转小写</span><br><span class="line">      #lowercase_column_names =&gt; false</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output &#123;</span><br><span class="line"></span><br><span class="line">  elasticsearch &#123;</span><br><span class="line">    hosts =&gt; [&quot;http://localhost:9200&quot;]</span><br><span class="line">    #按分钟</span><br><span class="line">    #index =&gt; &quot;mysql-%&#123;+YYYY.MM.dd.HH.mm&#125;&quot;</span><br><span class="line">    #按小时</span><br><span class="line">    index =&gt; &quot;logstashmysql&quot;</span><br><span class="line">    #index =&gt; &quot;wdnmd&quot;</span><br><span class="line">    #index =&gt; &quot;%&#123;[servicename]&#125;&quot;</span><br><span class="line">    #index =&gt; &quot;logstash-%&#123;[fields][document_type]&#125;-%&#123;+YYYY.MM.dd&#125;&quot;</span><br><span class="line">    #index =&gt; &quot;%&#123;[@metadata][beat]&#125;-%&#123;[@metadata][version]&#125;-%&#123;+YYYY.MM.dd&#125;&quot;</span><br><span class="line">    #user =&gt; &quot;elastic&quot;</span><br><span class="line">    #password =&gt; &quot;changeme&quot;</span><br><span class="line">  &#125;</span><br><span class="line">   stdout &#123;</span><br><span class="line">        codec =&gt; rubydebug</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 logstash 当前目录下启动 logstash</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/logstash -f logstash.conf</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-用-sql-语句查询-elasticsearch"><a href="#3-用-sql-语句查询-elasticsearch" class="headerlink" title="3. 用 sql 语句查询 elasticsearch"></a>3. 用 sql 语句查询 elasticsearch</h3><p>安装的 elasticsearch 是 7.5.2 版本，可以用 sql 语句查询 elasticsearch。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">POST &#x2F;_sql?format&#x3D;txt</span><br><span class="line">&#123;</span><br><span class="line">    &quot;query&quot;: &quot;SELECT order_id  FROM goodslist WHERE goods_list like &#39;%抽纸%&#39; group by order_id&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/aacc02d8gy1gbqj3fulqgj211h0er0vp.jpg#alt=%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200209223923.png"></p>
+<p>SQL 转 DSL</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">POST &#x2F;_sql&#x2F;translate?format&#x3D;txt</span><br><span class="line">&#123;</span><br><span class="line">    &quot;query&quot;: &quot;SELECT *  FROM mobile_index WHERE mobile like &#39;%760714206%&#39;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/aacc02d8ly1gckaw3oez9j212b0gp759.jpg#alt=DSL.png"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag"># 运维</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/12/SpringBoot%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B%E5%92%8CSpringMVC%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/" rel="prev" title="SpringBoot启动过程和SpringMVC的工作原理">
+      <i class="fa fa-chevron-left"></i> SpringBoot启动过程和SpringMVC的工作原理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/12/Join%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/" rel="next" title="Join工作原理">
+      Join工作原理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-ElasticSearch-%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">1. ElasticSearch 概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%90%AD%E5%BB%BA-ELK-%E7%8E%AF%E5%A2%83%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">2.</span> <span class="nav-text">2. 搭建 ELK 环境读取数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%94%A8-sql-%E8%AF%AD%E5%8F%A5%E6%9F%A5%E8%AF%A2-elasticsearch"><span class="nav-number">3.</span> <span class="nav-text">3. 用 sql 语句查询 elasticsearch</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhang Peng</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhang Peng</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyAOxPsO3R2S_FEcgmCicMAdmH2WL4dcqQw',
+      projectId: 'flash-spark-160014'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
